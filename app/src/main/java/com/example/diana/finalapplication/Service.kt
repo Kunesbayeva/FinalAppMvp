@@ -5,14 +5,12 @@ import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.POST
 
-/**
- * Created by gaukhar on 10.12.18.
- */
+
 interface Service {
 
-    @GET("your_url")
-    fun getItems () : Observable<List<Item>>
+    @GET("items/")
+    fun getItems () : Call<List<Item>>
 
-    @POST("your_url")
+    @POST("items/")
     fun insertItem (item : Item)
 }

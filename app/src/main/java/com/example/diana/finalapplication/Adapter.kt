@@ -7,9 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.item.view.*
 
-/**
- * Created by gaukhar on 10.12.18.
- */
+
 class Adapter(private val context : Context,
               private val items : ArrayList<Item>)
     : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
@@ -18,8 +16,11 @@ class Adapter(private val context : Context,
         val item = items.get(position)
 
         holder?.itemView?.tvName?.text = item.name
-        holder?.itemView?.tvTitle?.text = item.title
+        holder?.itemView?.tvMobile?.text = item.mobile
+        holder?.itemView?.tvHome?.text = item.work
+        holder?.itemView?.tvWork?.text = item.home
     }
+
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): RecyclerView.ViewHolder {
         return ItemsViewHolder(LayoutInflater.from(context).inflate(R.layout.item, parent, false))

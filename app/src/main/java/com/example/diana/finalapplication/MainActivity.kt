@@ -23,6 +23,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var service : Service
     private lateinit var database : Database
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -34,7 +35,7 @@ class MainActivity : AppCompatActivity() {
                 .allowMainThreadQueries()
                 .build()
 
-        val interceptor = HttpLoggingInterceptor(HttpLoggingInterceptor.Logger { })
+        val interceptor: HttpLoggingInterceptor = HttpLoggingInterceptor(HttpLoggingInterceptor.Logger { })
         interceptor.level = HttpLoggingInterceptor.Level.BODY
 
         val client =  OkHttpClient.Builder()
@@ -43,12 +44,23 @@ class MainActivity : AppCompatActivity() {
                 .addInterceptor(interceptor).build()
 
         retrofit = Retrofit.Builder()
-                .baseUrl("your_url")
+                .baseUrl("https://my-json-server.typicode.com/Kunesbayeva/FinalAppMvp/")
                 .client(client)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
 
         service = retrofit.create(Service::class.java)
+
+
+        /*service.getItems().enqueue(object : Callback<List<Item>> {
+            fun onResponse(call: Call<List<Item>>, response: Response<List<Item>>) {
+                log("response " + response.body()!!.size)
+            }
+
+            fun onFailure(call: Call<List<Item>>, t: Throwable) {
+
+            }
+        })*/
 
 
     }
@@ -61,10 +73,5 @@ class MainActivity : AppCompatActivity() {
             list.addAll(it)
         }
 
-
-        // List from retrofit
-        service.getItems().subscribe {
-            list.addAll(it)
-        }
     }
 }
